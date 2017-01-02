@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  div.wrapper-task
+    form(action="/tasks", method="post", class="task-new")
+      p.enter-task Enter a new task
+      input(type="text", name="task[title]", class="enter-text", id="title1", placeholder="Task name:")
+      textarea(name="task[description]", class="enter-description",id="description1", placeholder="Task description:")
+      input(type="submit", class="enter-submit", value="Submit")
+    a.back(href="/") <<

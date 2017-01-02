@@ -1,0 +1,11 @@
+extends layout
+block content
+  div.row
+    div.col-md-12
+      h1#welcome Welcome to the Task Manager
+
+  div.row
+    div.col-md-6.col-md-offset-3
+      ul.nav.navbar.navbar-nav
+        li: a(href="/tasks") Task Index
+        li: a(href="/tasks/new") New Task

@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1#task-header All Tasks
+
+  div.wrapper-table
+    table#task-table
+      caption.back: a(href='/') <<
+      tr
+        th Task
+        th Description
+        each task in tasks
+          tr
+            td#task-table-task: a(href="/tasks/#{task.id}")= task.title
+            td: a(href="/tasks/#{task.id}/edit")= task.description
+            td.no-column(style="border-style:hidden;")
+              form(action="/tasks/#{task.id}",method="post")
+              input(type="hidden", name="_method", value="DELETE")
+              input(type="submit", name="delete", value="delete")
