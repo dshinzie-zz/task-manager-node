@@ -68,6 +68,17 @@ app.post('/tasks', function(req, res) {
   })
 });
 
+app.get('tasks/:id', function(req, res) {
+  models.Task.findAll({
+    where: {
+      id: req.params.id
+    }
+  }).then(function(task) {
+    res.render('show', {
+      task: task
+    });
+  });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
