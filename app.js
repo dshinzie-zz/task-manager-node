@@ -20,7 +20,6 @@ var Sequelize = require('sequelize')
       storage: '../database_development.db'
     });
 
-
 sequelize
   .authenticate()
   .then(function(err) {
@@ -65,11 +64,11 @@ app.post('/tasks', function(req, res) {
     description: req.body['task[description]']
   }).then(function(task) {
     res.redirect('/tasks');
-  })
+  });
 });
 
-app.get('tasks/:id', function(req, res) {
-  models.Task.findAll({
+app.get('/tasks/:id', function(req, res) {
+  models.Task.findOne({
     where: {
       id: req.params.id
     }

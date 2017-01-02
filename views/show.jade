@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  div.wrapper-task
+    h1#task-title= task.title
+    p#task-description= task.description
+    a.back(href="/tasks") <<
