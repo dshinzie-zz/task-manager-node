@@ -12,6 +12,9 @@ var models  = require('./models');
 
 var app = express();
 
+var methodOverride = require('method-override')
+app.use(methodOverride('_method'));
+
 //database connection
 var Sequelize = require('sequelize')
   , sequelize = new Sequelize('database_name', 'username', 'password', {
@@ -100,12 +103,21 @@ app.post('/tasks/:id', function(req, res) {
   });
 })
 
+app.delete('/tasks/:id', function(req, res) {
+  models.Task.destroy(
+    { where: { id: req.params.id }}
+  ).then(function(task) {
+    res.redirect('/tasks');
+  });
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
+
 
 // error handler
 app.use(function(err, req, res, next) {
