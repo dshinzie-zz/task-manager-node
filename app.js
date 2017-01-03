@@ -79,6 +79,27 @@ app.get('/tasks/:id', function(req, res) {
   });
 });
 
+app.get('/tasks/:id/edit', function(req, res) {
+  models.Task.findOne({
+    where: {
+      id: req.params.id
+    }
+  }).then(function(task) {
+    res.render('edit', {
+      task: task
+    });
+  });
+})
+
+app.post('/tasks/:id', function(req, res) {
+  models.Task.update(
+    { title: req.body['task[title]'],
+      description: req.body['task[description]']},
+    { where: { id: req.params.id } }).then(function(task) {
+    res.redirect(`/tasks/${req.params.id}`);
+  });
+})
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
